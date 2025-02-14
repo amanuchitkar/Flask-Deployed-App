@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+Plant Disease Detection
+{% endblock pagetitle %}
+{% block body %}
+<style>
+  body {
+    overflow-x: hidden;
+  }
+
+  @media only screen and (max-width: 830px) {
+    .laptop {
+      display: none;
+    }
+  }
+
+  @media (min-width: 830px) and (max-width: 1536px) {
+    .mobile {
+      display: none;
+    }
+  }
+
+  .fruit-card img {
+    width: 100%;
+    height: 250px;  /* Fixed height for consistency */
+    object-fit: cover;  /* Ensures the image fits without distortion */
+    border-radius: 10px;  /* Add border-radius to make the image corners rounded */
+  }
+
+  .fruit-card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .img-placeholder {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 250px;  /* Fallback height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 10px; /* Matching the image border-radius */
+  }
+</style>
+
+<!-- <div class="mobile p-5">
+  <div class="row mb-5 text-center text-white">
+    <div class="col-lg-10 mx-auto">
+      <h1 class="display-4" style="padding-top: 2%; font-weight: 400; color: red;"><b>Note✍🏻</b></h1>
+      <p class="lead" style="font-weight: 500; color: black;">Please🙏 Open This Site On Laptop/PC 💻 Screen Only</p>
+      <p class="lead" style="font-weight: 500; color: black;">Thank You 🤝</p>    
+    </div>
+  </div>
+</div> -->
+
+<div class="row mb-5 text-center text-white laptop">
+  <div class="col-lg-10 mx-auto">
+    <h1 class="display-4" style="padding-top: 2%; font-weight: 400; color: rgb(4, 54, 4);"><b>🍁Plant Disease Detection🍁</b></h1>
+    <p class="lead" style="font-weight: 500; color: black;">This AI Engine Will Help To Detect Disease From Following Fruits And Veggies</p>
+  </div>
+</div>
+
+<center class="laptop">
+  <a href="/index">
+    <button class="bttn-pill bttn-lg btn-success"><b style="color: black;">Upload Image to AI</b></button>
+  </a>
+</center>
+
+<div class="row p-5 laptop">
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://post.healthline.com/wp-content/uploads/2020/09/Do_Apples_Affect_Diabetes_and_Blood_Sugar_Levels-732x549-thumbnail-1-732x549.jpg" 
+           alt="Apple" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Apple</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://www.supermarketperimeter.com/ext/resources/0430-blueberries.png?t=1588260305&width=1080" 
+           alt="Blueberry" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Blueberry</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/slideshows/health_benefits_of_cherries_slideshow/1800x1200_health_benefits_of_cherries_slideshow.jpg" 
+           alt="Cherry" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Cherry</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://i.ndtvimg.com/i/2015-09/grapes_625x350_61443376353.jpg" 
+      alt="Grape" 
+      onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Grape</p>
+    </div>
+  </div>
+</div>
+
+<div class="row p-5 laptop">
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://cdn.mos.cms.futurecdn.net/uMVmMrt4gYY28bmepYvmJ5.jpg" 
+           alt="Corn" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Corn</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://th.bing.com/th/id/OIP.fYYYEYkYKvJX3TQtF5ssIQHaE8?w=292&h=195&c=7&r=0&o=5&dpr=1.3&pid=1.7" 
+           alt="Orange" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Orange</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_tools/the_health_benefits_of_peaches_slideshow/thinkstock_rf_peaches.jpg?resize=650px:*" 
+           alt="Peach" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Peach</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://th.bing.com/th/id/OIP.iKKOYUvcgZGOKZnCNK2EAwHaE8?rs=1&pid=ImgDetMain" 
+           alt="Pepper Bell" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Pepper Bell</p>
+    </div>
+  </div>
+</div>
+
+<div class="row p-5 laptop">
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://m.economictimes.com/thumb/height-450,width-600,imgsize-111140,msid-72862126/potato-getty.jpg" 
+           alt="Potato" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Potato</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/326/326272/raspberries-with-ketones-in-a-bowl.jpg?w=1155&h=1541" 
+           alt="Raspberry" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Raspberry</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://m.economictimes.com/thumb/msid-66988154,width-1200,height-900,resizemode-4,imgsize-211276/soyabean-agencies.jpg" 
+           alt="Soybean" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Soybean</p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="fruit-card">
+      <img src="https://post.healthline.com/wp-content/uploads/2020/08/squash-fruit-or-vegetable-732x549-thumbnail-732x549.jpg" 
+           alt="Squash" 
+           onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+      <p class="lead" style="font-weight: 500; color: black;">Squash</p>
+    </div>
+  </div>
+</div>
+
+<center class="laptop">
+  <div class="row p-5">
+    <div class="col">
+      <div class="fruit-card">
+        <img src="https://images.indianexpress.com/2020/02/strawberry-1200.jpg" 
+             alt="Strawberry" 
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+        <p class="lead" style="font-weight: 500; color: black;">Strawberry</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="fruit-card">
+        <img src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/tomatoes-1296x728-feature.jpg" 
+             alt="Tomato" 
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/250x250?text=Image+Not+Available';">
+        <p class="lead" style="font-weight: 500; color: black;">Tomato</p>
+      </div>
+    </div>
+  </div>
+</center>
+
+{% endblock body %}

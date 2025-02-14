@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+AI Engine
+{% endblock pagetitle %}
+
+{% block body %}
+<div class="container py-5">
+    <!-- Heading Section -->
+    <div class="row mb-5 text-center text-white">
+        <div class="col-lg-10 mx-auto">
+            <h1 class="display-4" style="font-weight: 600; color: #2C6B2F;"><b>🍀 AI Engine 🍀</b></h1>
+            <p class="lead" style="font-weight: 500; color: #2F4F4F;">Let AI Engine help you detect diseases in plants before it's too late!</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Information Section (Left) -->
+        <div class="col-md-4 mb-4">
+            <div class="p-4 bg-white shadow rounded-lg" style="height: 100%; min-height: 350px;">
+                <h5><b>Why is it necessary to detect disease in plants?</b></h5>
+                <p>Plant diseases can hinder growth and result in crop loss. Early detection is crucial for minimizing the spread and ensuring plant health. By diagnosing diseases early, we can take necessary steps to control them and prevent loss.</p>
+
+                <h6><b>Advanced AI Detection</b></h6>
+                <p>Artificial Intelligence is revolutionizing the way we detect plant diseases. With image recognition models, AI can identify the smallest symptoms of plant diseases by analyzing images of plant leaves. Early detection means better management and minimized damage to crops.</p>
+
+                <h6><b>Technology Behind AI Engine</b></h6>
+                <p>Our AI Engine uses machine learning and deep learning algorithms trained on thousands of plant disease images. This allows us to accurately predict the health of plants based on their leaf characteristics.</p>
+            </div>
+        </div>
+
+        <!-- File Upload Section (Center) -->
+        <div class="col-md-4 mb-4">
+            <div class="p-4 bg-white shadow rounded-lg" style="height: 100%; min-height: 350px;">
+                <h5><b>Upload Plant's Leaf Image</b></h5>
+                <!-- File Upload Form with Drag-and-Drop -->
+                <form action="/submit" method="POST" enctype="multipart/form-data">
+                    <!-- File Upload with Clickable Box -->
+                    <div id="drop-zone" class="border-dashed p-4 mb-4 text-center" style="border: 2px dashed #2C6B2F; border-radius: 10px; cursor: pointer; height: 150px;">
+                        <h6>Click or Drag and Drop Image Here</h6>
+                        <p>Or Choose File to Upload</p>
+                        <input type="file" id="actual-btn" hidden name="image" onchange="previewImage()" />
+                        <span id="file-chosen">No file chosen</span>
+                    </div>
+
+                    <!-- Image Preview Section -->
+                    <div id="image-preview-container" class="text-center mb-4">
+                        <img id="preview-img" src="" alt="Image Preview" style="max-width: 100%; max-height: 300px; display: none; margin: 0 auto; border: 2px solid #2C6B2F; border-radius: 10px;"/>
+                    </div>
+
+                    <h6 class="text-center mb-4 text-muted">Simply upload your plant's leaf image and see the magic of AI.</h6>
+
+                    <center>
+                        <button type="submit" class="btn btn-success btn-lg">Submit</button>
+                    </center>
+                </form>
+            </div>
+        </div>
+
+        <!-- Prevention Tips Section (Right) -->
+        <div class="col-md-4 mb-4">
+            <div class="p-4 bg-white shadow rounded-lg" style="height: 100%; min-height: 350px;">
+                <h5><b>Prevent Plant Disease: Follow These Steps</b></h5>
+                <ol>
+                    <li>Follow good sanitation practices to avoid spreading pathogens.</li>
+                    <li>Fertilize your plants regularly to maintain strong and healthy growth.</li>
+                    <li>Inspect plants regularly for signs of disease, especially before planting.</li>
+                    <li>Ensure your soil is warm and not overly wet before planting crops.</li>
+                    <li>Rotate crops in your garden each season to minimize disease spread.</li>
+                    <li>Ensure good air circulation around plants to reduce the risk of fungal infections.</li>
+                    <li>Remove diseased stems and foliage regularly to prevent further contamination.</li>
+                </ol>
+
+                <h6><b>Additional Resources for Disease Prevention:</b></h6>
+                <ul>
+                    <li><a href="https://www.cropscience.bayer.com/en-us/plant-health" target="_blank">Bayer Crop Science</a></li>
+                    <li><a href="https://www.rhs.org.uk/advice/profile?pid=359" target="_blank">Royal Horticultural Society: Plant Disease</a></li>
+                    <li><a href="https://www.gardeners.com/how-to/plant-disease-prevention/8109.html" target="_blank">Gardeners' Supply: Disease Prevention</a></li>
+                </ul>
+                <a target="_blank" href="https://www.thespruce.com/prevent-plant-diseases-in-your-garden-2539511" class="btn btn-outline-success btn-block">More info</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const actualBtn = document.getElementById('actual-btn');
+    const fileChosen = document.getElementById('file-chosen');
+    const dropZone = document.getElementById('drop-zone');
+    const previewImg = document.getElementById('preview-img');
+
+    // Trigger file input dialog when user clicks anywhere inside the drop zone
+    dropZone.addEventListener('click', () => {
+        actualBtn.click();
+    });
+
+    actualBtn.addEventListener('change', function () {
+        fileChosen.textContent = this.files[0].name;
+    });
+
+    // Image Preview Function
+    function previewImage() {
+        const file = document.getElementById("actual-btn").files[0];
+        const fileChosen = document.getElementById("file-chosen");
+
+        if (file) {
+            fileChosen.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewImg.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            fileChosen.textContent = "No file chosen";
+            previewImg.style.display = "none";
+        }
+    }
+
+    // Drag and Drop Functionality
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.backgroundColor = '#f0f0f0';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.backgroundColor = 'transparent';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        document.getElementById("actual-btn").files = e.dataTransfer.files;
+        previewImage();
+        dropZone.style.backgroundColor = 'transparent';
+        fileChosen.textContent = file.name;
+    });
+</script>
+
+{% endblock body %}
