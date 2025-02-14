@@ -4,7 +4,8 @@ from flask import Flask, render_template, request
 from PIL import Image
 import numpy as np
 import pandas as pd
-import tensorflow as tf
+import tensorflow.lite as tflite
+
 
 # Set up logging to debug issues
 logging.basicConfig(level=logging.DEBUG)
@@ -14,26 +15,28 @@ disease_info = pd.read_csv('disease_info.csv', encoding='cp1252')
 supplement_info = pd.read_csv('supplement_info.csv', encoding='cp1252')
 
 # Load the Keras model
-model = tf.keras.models.load_model('modul1.keras')
+
 
 # Prediction function
+
 def model_prediction(test_image):
-    try:
-        # Load the image and preprocess it
-        image = tf.keras.preprocessing.image.load_img(test_image, target_size=(128, 128))
-        input_arr = tf.keras.preprocessing.image.img_to_array(image)
-        input_arr = np.array([input_arr])  # Convert single image to batch
-        predictions = model.predict(input_arr)
-        
-        # Log predictions to debug
-        logging.debug(f"Predictions: {predictions}")
-        
-        # Return the index of the predicted class (highest probability)
-        return np.argmax(predictions)
+    interpreter = tflite.Interpreter(model_path="modul1.tflite")
+    interpreter.allocate_tensors()
     
-    except Exception as e:
-        logging.error(f"Error during prediction: {e}")
-        return None
+    input_details = interpreter.get_input_details()
+    output_details = interpreter.get_output_details()
+    
+    image = tf.keras.preprocessing.image.load_img(test_image, target_size=(128, 128))
+    input_arr = tf.keras.preprocessing.image.img_to_array(image)
+    input_arr = input_arr.astype("float32") / 255.0
+    input_arr = input_arr.reshape(1, 128, 128, 3)
+
+    interpreter.set_tensor(input_details[0]['index'], input_arr)
+    interpreter.invoke()
+    
+    predictions = interpreter.get_tensor(output_details[0]['index'])
+    return predictions.argmax()
+
 
 app = Flask(__name__)
 
